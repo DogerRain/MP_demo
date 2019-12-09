@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contxt="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl"
-                  value="jdbc:mysql://127.0.0.1:3306/for_test?useUnicode=yes&amp;characterEncoding=UTF-8" />
+    <!-- 扫描 service 包下面使用@Component/@Service/@Repository/@Controller 注解的类 将其实例化，放入容器中   -->
+    <contxt:component-scan base-package="com.meizu" />
+
+    <!--创建数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 数据库驱动 -->
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <!-- 数据库连接 -->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/tumo" />
+        <!-- 数据库用户名 -->
         <property name="user" value="root"/>
+        <!-- 数据库密码 -->
         <property name="password" value="root"/>
-        <property name="minPoolSize" value="3"/>
-        <property name="maxPoolSize" value="20"/>
-        <property name="acquireIncrement" value="1"/>
-        <property name="testConnectionOnCheckin" value="true"/>
-        <property name="maxIdleTimeExcessConnections" value="240"/>
-        <property name="idleConnectionTestPeriod" value="300"/>
     </bean>
-    <!--配置事务管理-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+    <!-- 配置mybatis  -->
+    <!--<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">-->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+        <!-- 数据源的实例化 -->
         <property name="dataSource" ref="dataSource"/>
+        <!-- 配置包别名 -->
+        <property name="typeAliasesPackage" value="com.meizu.common"/>
+        <!-- 映射 DML 语法 -->
+        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+
     </bean>
-    <!--启用spring的事务注解功能-->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- 映射 数据访问层 ( dao ) 中的接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.meizu.dao"/>
+    </bean>
 
 </beans>

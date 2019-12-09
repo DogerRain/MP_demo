@@ -19,7 +19,7 @@
     <task:executor id="taskExecutor" />
     <task:annotation-driven executor="taskExecutor" scheduler="taskScheduler" />
 
-    <import resource="classpath:elastic.xml" />
+    <!--<import resource="classpath:elastic.xml" />-->
     <import resource="classpath:mysql.xml"/>
     <import resource="classpath:spring/spring-service.xml"/>
 
