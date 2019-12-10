@@ -11,7 +11,7 @@
     <title>Title</title>
     <div>
 
-        Hello , MEIZU !
+        Hello , MEIZU ! web-info
     </div>
 </head>
 <body>

@@ -7,6 +7,7 @@
     <groupId>meizuTest</groupId>
     <artifactId>meizuTest</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <properties>
         <!--<spring.version>4.2.6.RELEASE</spring.version>-->
         <spring.version>3.1.2.RELEASE</spring.version>
@@ -199,23 +200,25 @@
 
 
     </dependencies>
-    <!--<build>-->
-        <!--<plugins>-->
+    <build>
+        <plugins>
             <!--&lt;!&ndash;servlet容器 jetty插件&ndash;&gt;-->
             <!--<plugin>-->
                 <!--<groupId>org.eclipse.jetty</groupId>-->
                 <!--<artifactId>jetty-maven-plugin</artifactId>-->
                 <!--<version>9.3.10.v20160621</version>-->
             <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>6</source>-->
-                    <!--<target>6</target>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                    <webXml>WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

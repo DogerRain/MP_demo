@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+    <appender name="PROJECT-CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="encoding" value="UTF-8" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] [%c] - %m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="SERVER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/log/jetty/server.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] [%c] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="TRACE" />
+            <param name="LevelMax" value="ERROR" />
+        </filter>
+    </appender>
+    
+    <appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/log/jetty/error.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] [%c] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ERROR" />
+            <param name="LevelMax" value="FATAL" />
+        </filter>
+    </appender>
+    
+    <appender name="OPERATION" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/data/log/jetty/operation.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] [%c] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="TRACE" />
+            <param name="LevelMax" value="ERROR" />
+        </filter>
+    </appender>
+    
+    <logger name="operation_log" additivity="false">
+		<level value="info" />
+		<appender-ref ref="OPERATION"/>
+	</logger>
+	
+	
+    <root>
+        <priority value="info"/>
+        <appender-ref ref="PROJECT-CONSOLE"/>
+        <appender-ref ref="SERVER"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+</log4j:configuration>
