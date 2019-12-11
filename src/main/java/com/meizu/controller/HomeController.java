@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/home")
-//@Slf4j
+@Slf4j
 public class HomeController {
 
 //    @Autowired
@@ -30,6 +30,7 @@ public class HomeController {
         //返回一个index.jsp这个视图
         String city = City.getCityNameByIndex("1");
         System.out.printf(city);
+        log.info("cityName:{}",city);
         return "index1";
     }
 }
