@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <properties>
-        <!--<spring.version>4.2.6.RELEASE</spring.version>-->
-        <spring.version>3.1.2.RELEASE</spring.version>
+        <spring.version>4.2.6.RELEASE</spring.version>
+        <!--<spring.version>3.1.2.RELEASE</spring.version>-->
         <!--<spring.version>4.2.5.RELEASE</spring.version>-->
         <elasticjob.version>2.1.5</elasticjob.version>
     </properties>
@@ -104,7 +104,11 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.11</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
@@ -176,7 +180,11 @@
             <artifactId>elastic-job-lite-spring</artifactId>
             <version>${elasticjob.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
         <!--魅族仓库内部包，版本-->
         <!--<dependency>-->
             <!--<groupId>com.dangdang</groupId>-->
@@ -191,12 +199,12 @@
             <!--<version>1.0.8-RC02</version>-->
         <!--</dependency>-->
 
-        <!--<dependency>-->
-            <!--<groupId>junit</groupId>-->
-            <!--<artifactId>junit</artifactId>-->
-            <!--<version>4.9</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
 
     </dependencies>

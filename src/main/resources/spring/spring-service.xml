@@ -1,10 +1,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
+    <import resource="spring-dao.xml"/>
     <context:component-scan base-package="com.meizu.service"/>
-    <!--<bean id="homeService" class="com.meizu.service.HomeService"/>-->
+
+
+    <bean id="helloWorld" class="com.meizu.AOP.HelloWorld"/>
+    <bean id="timeLog" class="com.meizu.AOP.TimeLoggingAop"/>
+
+    <aop:config>
+        <!--任意公共方法的执行 bean id="timeLog" 的方法-->
+        <aop:pointcut id="hello" expression="execution(public * * (..))"/>
+        <aop:advisor
+                id="timeLogAdvisor"
+                advice-ref="timeLog"
+                pointcut-ref="hello"/>
+    </aop:config>
 
 </beans>
